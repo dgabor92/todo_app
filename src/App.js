@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button, FormControl, Input, InputLabel } from "@material-ui/core"; // imported everything from https://material-ui.com/
 import "./App.css";
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
     event.preventDefault(); // this will stop the refresh
     console.log("I'm working");
     setTodos([...todos, input]);
-    setInput("");
+    setInput(""); // clear up the input field
   };
 
   return (
@@ -22,13 +23,24 @@ function App() {
       <h1>Todo-App With Firebase 🔥</h1>
 
       <form>
-        <input
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
-        />
-        <button type="submit" onClick={addTodo}>
+        <FormControl>
+          <InputLabel>Write a Todo</InputLabel>
+          <Input
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+          />
+        </FormControl>
+
+        <Button
+          disabled={!input}
+          type="submit"
+          onClick={addTodo}
+          variant="contained"
+          color="primary"
+        >
           Add Todo
-        </button>
+        </Button>
+        {/* <button>Add Todo</button> */}
       </form>
 
       <ul>

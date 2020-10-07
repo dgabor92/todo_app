@@ -6,6 +6,7 @@ import db from "../firebase";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+  // css for edit field
   paper: {
     position: "absolute",
     width: 400,
@@ -18,11 +19,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Todo(props) {
   //going through the todo array and list the first one then through again and list the second
-
   const classes = useStyles();
-
   const [open, setOpen] = useState(false);
-  const [input, setInput] = useState();
+  const [input, setInput] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -30,14 +29,9 @@ function Todo(props) {
 
   const updateTodo = () => {
     // update the todo with the new input text
-
-    db.collection("todo").doc(props.todo.id).set(
-      {
-        todo: input,
-      },
-      { merge: true }
-    );
-
+    db.collection("todo")
+      .doc(props.todo.id)
+      .set({ todo: input }, { merge: true });
     setOpen(false);
   };
 

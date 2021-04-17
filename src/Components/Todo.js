@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { Button, List, ListItem, ListItemText, Modal } from "@material-ui/core"; // imported everything from https://material-ui.com/
-import "./Todo.css";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import db from "../firebase";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from 'react';
+import { Button, List, ListItem, ListItemText, Modal } from '@material-ui/core'; // imported everything from https://material-ui.com/
+import './Todo.css';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import db from '../firebase';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   // css for edit field
   paper: {
-    position: "absolute",
+    position: 'absolute',
     width: 400,
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -21,15 +21,15 @@ function Todo(props) {
   //going through the todo array and list the first one then through again and list the second
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
 
   const updateTodo = () => {
     // update the todo with the new input text
-    db.collection("todo")
+    db.collection('todo')
       .doc(props.todo.id)
       .set({ todo: input }, { merge: true });
     setOpen(false);
@@ -59,7 +59,7 @@ function Todo(props) {
         </ListItem>
         <button onClick={(e) => setOpen(true)}>Edit</button>
         <DeleteForeverIcon
-          onClick={(event) => db.collection("todo").doc(props.todo.id).delete()} // one line code and you could delete todo
+          onClick={(event) => db.collection('todo').doc(props.todo.id).delete()} // one line code and you could delete todo
         />
       </List>
     </>
